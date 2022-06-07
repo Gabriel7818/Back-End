@@ -1,0 +1,11 @@
+{
+  "name": "p4-express",
+  "version": "1.0.0",
+  "description": "Api Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Oliveira Damasceno",
+  "license": "ISC"
+}

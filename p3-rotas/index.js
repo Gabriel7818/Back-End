@@ -7,8 +7,14 @@ app.get("/", function (req, res) { // request, response (req, res)
     res.send("Página Inicial do Serviço");
 });
 
+app.get("/sobre-empresa", (req, res) => {
+    res.send("Página Sobre a Empresa do App");
+});
+
+app.get("/contato", (req, res) => {
+    res.send("Página de Contato do App");
+});
+
 app.listen(port, () => {
     console.log(`Servidor Iniciado na Porta ${port}: "http://localhost:${port}"`);
 });
-
-// https://expressjs.com/pt-br/starter/hello-world.html
