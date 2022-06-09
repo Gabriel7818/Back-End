@@ -17,4 +17,4 @@ app.get("/contato", (req, res) => {
 
 app.listen(port, () => {
     console.log(`Servidor Iniciado na Porta ${port}: "http://localhost:${port}"`);
-});
+})
