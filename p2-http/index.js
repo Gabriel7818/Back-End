@@ -7,5 +7,5 @@ const server = http.createServer((req, res) => {  // Variável para criar o Serv
 
 server.listen(port, () => {
     console.log(`Servidor Iniciado na Porta ${port}: "http://localhost:${port}"`);
-})
+});
 

@@ -10,5 +10,5 @@ var valDiscount = 37;
 
 var finalValue = funcDiscount(valProduct, valDiscount);
 
-console.log(`Valor do Produto com Desconto: R$${finalValue}.00`)
+console.log(`Valor do Produto com Desconto: R$${finalValue}.00`);
 
