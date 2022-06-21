@@ -82,6 +82,23 @@ app.put("/user", async (req, res) => {
     });
 });
 
+app.delete("/user/:id", async (req, res) => {
+    const {id} = req.params;
+    await User.destroy({where:{id}})
+    .then(() => {
+        return res.json({
+            erro: false,
+            mensagem: "Usuário Deletado com Sucesso !"
+        });
+    }).catch((err) => {
+        return res.status(400).json({
+            erro: true,
+            mensagem: `Erro: ${err}, Usuário não Deletado`
+        });
+    });
+});
+
+
 app.listen(port, () => {
     console.log(`Servidor iniciado na porta: ${port}: "http://localhost:${port}"`);
 });
