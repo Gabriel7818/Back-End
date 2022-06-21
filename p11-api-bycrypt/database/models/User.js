@@ -19,6 +19,10 @@ const User = db.define('users', {
     gender: {
         type: Sequelize.STRING(1),
         allowNull: true,
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 

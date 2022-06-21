@@ -13,7 +13,7 @@ app.get("/", function(req, res) {
 
 app.get("/users", async (req, res) => {
     await User.findAll({
-        attributes: ['id', 'name', 'email', 'gender'],
+        attributes: ['id', 'name', 'email', 'gender', 'password'],
         order:[['name', 'ASC']]
     }).then((users) => {
         return res.json({
@@ -52,6 +52,11 @@ app.get('/users/:id', async (req, res) => {
 
 app.post("/user", async (req, res) => {
     // const {name, email, gender, password} = req.body;
+    var dados = req.body;
+    console.log(dados);
+    dados.password = await bcrypt.hash(dados.password, 8);
+    console.log(dados.password);
+
     await User.create(req.body)
     .then(() => {
         return res.json({
