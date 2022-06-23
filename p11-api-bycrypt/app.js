@@ -1,8 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const app = express();
-const port = 4500;
 const User = require('./database/models/User');
+const port = 4500;
+require('dotenv').config()
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -104,6 +105,24 @@ app.delete("/user/:id", async (req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`Servidor iniciado na porta: ${port}: "http://localhost:${port}"`);
+app.get('/user-senha', async (req,res) => {
+    const {id, password} = req.body;
+    var senhaCrypt = await bycrypt.hash(password, 8);
+    
+    await User.update({password: senhaCrypt}, {where: {id: id}})
+    .then(() => {
+        return res.json({
+            erro: false,
+            mensagem: "Senha Editada com Sucesso !"
+        });
+    }).catch((err) => {
+        return res.status(400).json({
+            erro: true,
+            mensagem: `Erro: ${err}. A Senha não Foi Alterada !`
+        });
+    });
+});
+
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor iniciado na porta: ${process.env.PORT}: "http://localhost:${process.env.PORT}"`);
 });
