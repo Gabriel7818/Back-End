@@ -15,5 +15,5 @@ app.get('/', function (req, res) {
 app.use(router);
 
 app.listen(3033, () => {
-    console.log(`Servidor iniciado na porta ${3033} "http://localhost:${3033}"`);
-});
+    console.log(`Servidor iniciado na porta ${process.env.PORT} "http://localhost:${process.env.PORT}"`);
+}); 

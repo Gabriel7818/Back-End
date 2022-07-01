@@ -11,4 +11,4 @@ categoriesRoutes.put("/update", categories.update);
 
 categoriesRoutes.delete("/delete/:id", categories.delete);
 
-module.exports = categoriesRoutes;
+module.exports = categoriesRoutes; 

@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../database/db');
 const Categories = require('./Categories');
 
-const Products = db.define('products', {
+const Products = db.define('goliveira_products', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -25,20 +25,22 @@ const Products = db.define('products', {
         type: Sequelize.DECIMAL(15,2),
         allowNull: false,
     }
-})
+});
 
 Products.belongsTo(Categories, {
     constraint: true,
-    foreignKey: 'categorieId'
-})
+    foreignKey: 'categorieId',
+    onDelete: 'RESTRICT',
+    onUpdate: 'CASCADE'
+});
 
-//Criar a tabela com sequelize
+// Criar a tabela com sequelize
 // Products.sync();
 
-//Excluir a tabela e criar novamente
-//Products.sync({ force: true});
+// Excluir a tabela e criar novamente
+// Products.sync({ force: true});
 
-//Verificar se há alguma diferença na tabela, realiza alteração
+// Verificar se há alguma diferença na tabela, realiza alteração
 // Products.sync({ alter: true});
 
 module.exports = Products;

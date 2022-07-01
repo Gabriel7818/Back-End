@@ -1,18 +1,19 @@
-const Categories = require('../models/Categories')
+const Products = require('../models/Users');
+
 
 exports.findAll = async (req, res) => {
-    await Categories.findAll({
-        atributes: ['id', 'name', 'description'],
+    await Products.findAll({
+        atributes: ['id', 'name', 'email', 'gender', 'password'],
         order: [['name', 'ASC']]
-    }).then((Categories) => {
+    }).then((Users) => {
         return res.json({
             erro: false,
-            Categories
+            Users
     });
     }).catch((err) => {
         return res.status(404).json({
             erro: true,
-            mensagem: `Erro: ${err}, Nenhuma Categoria Encontrada !`
+            mensagem: `Erro: ${err}, Nenhum Usuário Encontrado !`
         });
     });
 };
@@ -20,16 +21,16 @@ exports.findAll = async (req, res) => {
 exports.findOne = async (req, res) => {
     const {id} = req.params;
     try{
-        const Categories = await User.findByPk(id);
-        if(!Categories){
+        const Users = await User.findByPk(id);
+        if(!Users){
             return res.status(400).json({
                 erro: true,
-                mensagem: "Erro: Nenhuma Categoria Encontrada !"
+                mensagem: "Erro: Nenhum Usuário Encontrado !"
             });
         };
         res.status(200).json({
             erro: false,
-            Categories
+            Users
         });
     }catch(err) {
         res.status(404).json({
@@ -41,48 +42,48 @@ exports.findOne = async (req, res) => {
 
 exports.create = async (req, res) => {
     var dados = req.body;
-    await Categories.create(dados)
+    await Users.create(dados)
     .then(() =>{
         return res.json({
             erro: false,
-            mensgem: 'Categoria Cadastrada com Sucesso !'
+            mensgem: 'Usuário Cadastrado com Sucesso !'
         });
     }).catch(err => {
         return res.status(400).json({
             erro: true,
-            mensgem: `Erro:${err}, Categoria Não Cadastrada !`
+            mensgem: `Erro:${err}, Usuário Não Cadastrado !`
         });
     });
 };
 
 exports.update = async (req, res) => {
     const {id} = req.body;
-    await Categories.update(req.body, {where: {id}})
+    await Users.update(req.body, {where: {id}})
     .then(() => {
         return res.json({
             erro: false,
-            mensagem: 'Categoria Alterada com Sucesso !'
+            mensagem: 'Usuário Alterado com Sucesso !'
         })
     }).catch((err) =>{
         return res.status(400).json({
             erro: true,
-            mensagem: `Erro:${err}, Categoria não Alterada`
+            mensagem: `Erro:${err}, Usuário não Alterado !`
         });
     });
 };
 
 exports.delete = async (req, res) => {
     const {id} = req.params;
-    await Categories.destroy({where: {id}})
+    await Users.destroy({where: {id}})
     .then(() => {
         return res.json({
             erro: false,
-            mensagem: 'Categoria Apagada com Sucesso !'
+            mensagem: 'Usuário Apagado com Sucesso !'
         })
     }).catch((err) => {
         return res.status(400).json({
             erro: true,
-            mensagem: `Erro:${err}, Categoria não apagada !`
+            mensagem: `Erro:${err}, Usuário não apagado !`
         });
     });
 };

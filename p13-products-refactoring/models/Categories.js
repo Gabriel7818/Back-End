@@ -16,15 +16,15 @@ const Categories = db.define('goliveira_categories', {
         type: Sequelize.STRING,
         allowNull: true,
     }
-})
+});
 
-//Criar tabelas com sequelize 
+// Criar tabelas com sequelize 
 // Categories.sync();
 
-//Excluir a tabelas fazer novamente 
+// Excluir a tabela e fazer novamente 
 // Categories.sync({force: true});
 
-//Verificar se há alguma diferença na tabela, e fazer alteracao nelas
+// Verificar se há alguma diferença na tabela, e fazer alteracao nelas
 // Categories.sync({alter: true});
 
 module.exports = Categories;
