@@ -1,0 +1,14 @@
+.box{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.borderForm{
+    box-shadow: 5px 5px 15px 5px #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 100px;
+}

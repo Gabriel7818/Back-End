@@ -3,12 +3,18 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('senac', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
+    // dialectOptions: {
+    //     ssl: {
+    //         require: false,
+    //         rejectUnauthorized: false
+    //     }
+    // }
 });
 
-sequelize.authenticate(0).then(function() {
-    console.log('Conexão com o Database Realizada com Sucesso !');
-}).catch(function(err) {
-    console.log(`Erro de Conexão: ${err}`);
-});
+sequelize.authenticate().then( () => {
+    console.log('Conexão com o banco de dados realizada com sucesso!');
+}).catch( (err) => {
+    console.log(`Erro Conexão: ${err}`);
+})
 
 module.exports = sequelize;

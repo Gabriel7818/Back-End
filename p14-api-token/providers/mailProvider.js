@@ -1,4 +1,4 @@
-module.exports = function sendMail(to, cc, subject, html){
+module.exports = function sendMail(to,cc,subject,html){
     const nodemailer = require('nodemailer');
 
     const smtpTransport = nodemailer.createTransport({
@@ -12,7 +12,7 @@ module.exports = function sendMail(to, cc, subject, html){
     })
 
     const message = {
-        from: 'Gabriel.Damasceno7818@outlook.com.br',
+        from: 'contato@jsfernando.com',
         to,
         cc,
         bcc: process.env.SMTP_USERNAMEACCOUNT,
@@ -22,9 +22,9 @@ module.exports = function sendMail(to, cc, subject, html){
 
     smtpTransport.sendMail(message, (err, res) =>{
         if(err){
-            console.log(`Erro ao Enviar E-mail: ${err}`);
+            console.log(`Erro ao enviar email: ${err}`);
         } else {
-            console.log('Email Enviado com Sucesso !')
+            console.log('Email enviado com sucesso!')
         }
         smtpTransport.close();
     })
