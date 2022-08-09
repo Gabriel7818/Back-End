@@ -40,7 +40,7 @@ app.get("/users", validaToken, async (req, res) =>{
     }).catch( (err) => {
         return res.status(400).json({
             erro: true,
-            mensagem: `Erro: ${err} ou Nenhum Usuário encontrado!!!`
+            mensagem: `Erro: ${err}. Nenhum Usuário Encontrado`
         })
     })
 
@@ -70,7 +70,7 @@ app.get('/user/:id', async (req, res) => {
     }
 });
 
-app.post("/user", async (req, res) => {
+app.post("/user", validaToken, async (req, res) => {
     var dados = req.body;
     dados.password = await bcrypt.hash(dados.password, 8);
    
@@ -108,12 +108,12 @@ app.put("/user", async (req, res) => {
     .then(() => {
         return res.json({
             erro:false,
-            mensagem: 'Usuário alterado com sucesso!'
+            mensagem: 'Usuário Alterado com Sucesso !'
         })
     }).catch( (err) =>{
         return res.status(400).json({
             erro: true,
-            mensagem: `Erro: Usuário não alterado ...${err}`
+            mensagem: `Erro: Usuário não Alterado ! :${err}`
         })
     })
 })
@@ -129,7 +129,7 @@ app.delete("/user/:id", async (req, res) => {
     }).catch( (err) =>{
         return res.status(400).json({
             erro: true,
-            mensagem: `Erro: ${err} Usuário não apagado...`
+            mensagem: `Erro: ${err} Usuário não apagado !`
         });
     });
 });
@@ -174,7 +174,7 @@ app.post("/login", async (req, res) => {
     })
 })
 
-app.put('/user-senha', async (req, res) => {
+app.put('/user-senha', validaToken, async (req, res) => {
     const {id, password } = req.body;
     var senhaCrypt = await bcrypt.hash(password, 8);
 
@@ -182,18 +182,32 @@ app.put('/user-senha', async (req, res) => {
     .then(() => {
         return res.json({
             erro: false,
-            mensagem: "Senha edita com sucesso!"
+            mensagem: "Senha Editada com Sucesso!"
         }); 
     }).catch( (err) => {
         return res.status(400).json({
             erro: true,
-            mensagem: `Erro: ${err}... A senha não foi alterada!!!`
+            mensagem: `Erro: ${err}... Senha não Editada !`
         })
     })
 })
 
-
+app.get("/validatoken", validaToken, async (req, res) => {
+    await User.findByPk(req.userId, {
+         attributes: ['id', 'name', 'email']
+        }).then( (user) => {
+            return res.status(200).json({
+                erro: false,
+                user
+            });
+        }).catch( () => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: É Necessário Realizar o Login !"
+            })
+        })
+})
 
 app.listen(process.env.PORT, () => {
-    console.log(`Servidor iniciado na porta ${process.env.PORT} http://localhost:${process.env.PORT}`);
+    console.log(`Servidor iniciado na porta ${process.env.PORT} "http://localhost:${process.env.PORT}"`);
 });

@@ -8,4 +8,8 @@ router.use('/categories', categoriesRoutes);
 const productsRoutes = require('./products.routes');
 router.use("/products", productsRoutes)
 
+// Route In Users
+const usersRoutes = require('./users.routes');
+router.use("/users", usersRoutes)
+
 module.exports = router;
