@@ -2,7 +2,6 @@ const Users = require('../models/Users');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
 exports.findAll = async (req, res) => {
     await Users.findAll({
         atributes: ['id', 'name', 'email', 'gender', 'password'],
